@@ -15,7 +15,7 @@ builder.Services.AddDbContext<HeroDbContext>(
     {
         options.UseSqlServer(connection);
     });
-
+builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

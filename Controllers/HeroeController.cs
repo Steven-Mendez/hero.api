@@ -1,4 +1,5 @@
-﻿using hero.api.Entities;
+﻿using hero.api.Dtos;
+using hero.api.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace hero.api.Controllers
@@ -15,14 +16,27 @@ namespace hero.api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Hero>> Get()
+        public ActionResult<IEnumerable<HeroResponseDto>> Get()
         {
-            return Ok(dbContext.Heroes.ToList());
+            var response = new HeroResponseDto();
+            var heroes = dbContext.Heroes;
+            foreach (var hero in heroes)
+            {
+                response.Data.Add(hero);
+            }
+            response.Message = "Consulta Exitosa";
+
+            return Ok(response);
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] Hero hero)
+        public ActionResult Post([FromBody] HeroRequestDto heroRequest)
         {
+            var hero = new Hero()
+            {
+                Name = heroRequest.Name,
+                SuperPower = heroRequest.SuperPower,
+            };
             dbContext.Heroes.Add(hero);
             dbContext.SaveChanges();
             return Ok();
