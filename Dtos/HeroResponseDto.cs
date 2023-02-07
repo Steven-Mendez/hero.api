@@ -1,6 +1,4 @@
-﻿using hero.api.Entities;
-
-namespace hero.api.Dtos
+﻿namespace hero.api.Dtos
 {
     public class HeroResponseDto
     {
