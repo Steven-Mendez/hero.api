@@ -16,12 +16,21 @@ namespace hero.api.Controllers
             this.dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Gets All the heroes from the Justice League
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult<IEnumerable<Hero>> Get()
         {
             return Ok(new ApiResult() { Data = dbContext.Heroes.ToList(), Message = "Hero Information"});
         }
 
+        /// <summary>
+        /// Creates new hero
+        /// </summary>
+        /// <param name="hero"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Post([FromBody] Hero hero)
         {
@@ -33,6 +42,11 @@ namespace hero.api.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Modifies an existing hero
+        /// </summary>
+        /// <param name="hero"></param>
+        /// <returns></returns>
         [HttpPut]
         public ActionResult Put([FromBody] Hero hero)
         {
@@ -52,6 +66,11 @@ namespace hero.api.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Removes a hero from Justice league
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("{id}")]
         public ActionResult Delete(int id)
